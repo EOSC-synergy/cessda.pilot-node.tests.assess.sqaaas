@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: fix/updatego
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.pilot-node.tests:
+      branch: main
+      repo: https://github.com/cessda/cessda.pilot-node.tests
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.pilot-node.tests git:
+        commands:
+        - /usr/bin/env sh .sqa/script.mauve_serene_rabbit.sh
+        container: qc.acc_onyx_analytical_narwhal
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.pilot-node.tests find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloud_tranquil_hare.sh
+        container: qc.doc_iris_carefree_quokka
+      github.com/cessda/cessda.pilot-node.tests git:
+        commands:
+        - /usr/bin/env sh .sqa/script.pearl_jubilant_caiman.sh
+        container: qc.doc_cinnabar_audacious_squirrel
+      github.com/cessda/cessda.pilot-node.tests markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.ginger_daring_grasshopper.sh
+        container: qc.doc_heather_cheerful_bear
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.pilot-node.tests licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.papaya_calm_panther.sh
+        container: qc.lic_lagoon_bewildered_sparrow
+  QC.Met:
+    repos:
+      github.com/cessda/cessda.pilot-node.tests cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.gray_lucky_camel.sh
+        container: qc.met_navy_loving_capybara
+  QC.Sty:
+    repos:
+      github.com/cessda/cessda.pilot-node.tests checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.lime_reliable_alligator.sh
+        container: qc.sty_cinnabar_outgoing_donkey
+      github.com/cessda/cessda.pilot-node.tests jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.copper_thankful_kirin.sh
+        container: qc.sty_cyan_artistic_ocelot
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.pilot-node.tests get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.cerulean_romantic_ibex.sh
+        container: qc.ver_navy_worried_cassowary
+timeout: 5400
